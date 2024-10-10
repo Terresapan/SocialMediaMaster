@@ -1,11 +1,9 @@
 import time
 import google.generativeai as genai
-import os
-from dotenv import load_dotenv
-load_dotenv()
+import streamlit as st
 
 # Access the Gemini API key from the environment variables
-gemini_api_key = os.getenv("GEMINI_API_KEY")  # Ensure this is the correct name as defined in your .env file
+gemini_api_key = st.secrets["GEMINI_API_KEY"]["API_KEY"] 
 
 # Configure the gemini API with the API key
 if gemini_api_key:  # Check if the API key was loaded successfully
