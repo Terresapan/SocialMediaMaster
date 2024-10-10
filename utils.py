@@ -1,6 +1,4 @@
-import streamlit as st
 import os
-import time
 import google.generativeai as genai
 
 # Function to save feedback to a file
