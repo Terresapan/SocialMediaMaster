@@ -3,15 +3,15 @@ from utils import save_feedback
 from backend import upload_to_gemini, wait_for_files_active, generate_suggestions
 
 # enhanced streamlit chatbot interface
-st.sidebar.header("✨ short video content master")
+st.sidebar.header("✨ Short Video Content Master")
 st.sidebar.markdown(
     "This app answers your questions about short video content strategy and execution. "
-    "To use this app, you need to provide a Google Gemini API key, which you can get [here](https://aistudio.google.com/app/apikey) for free."
+    "To use this app, you'll need to provide a Google Gemini API key, which you can obtain for free [here](https://aistudio.google.com/app/apikey)."
 )
 st.sidebar.write("### Instructions")
-st.sidebar.write(":pencil: Enter your video topic or theme, target audience, and question you want to ask.")
-st.sidebar.write(":point_right: Click 'generate suggestions' to receive suggestions.")
-st.sidebar.write(":heart_decoration: Tell me your thoughts and feedback about the app.")
+st.sidebar.write(":pencil: Enter your video topic or theme, target audience, unique selling points, and question you want to ask.")
+st.sidebar.write(":point_right: Click 'Generate Suggestions' to get inspired.")
+st.sidebar.write(":heart_decoration: Let me know your thoughts and feedback about the app.")
 
 # Initialize session state for feedback storage if not already done
 if 'feedback' not in st.session_state:
