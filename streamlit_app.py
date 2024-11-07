@@ -1,6 +1,11 @@
+import os
 import streamlit as st
 from utils import save_feedback
 from backend import upload_to_gemini, wait_for_files_active, generate_suggestions
+
+os.environ["LANGCHAIN_TRACING_V2"] = "true"
+os.environ["LANGCHAIN_API_KEY"] = st.secrets["LANGCHAIN_API_KEY"]["API_KEY"]
+os.environ["LANGCHAIN_PROJECT"] = "Video_Content_Master"
 
 # enhanced streamlit chatbot interface
 st.sidebar.header("✨ Short Video Content Master")
@@ -53,24 +58,25 @@ else:
         if not video_topic_input or not target_audience_input or not selling_point_input or not question_input:
             st.error("Please fill out all fields to generate suggestions.", icon="🚫")
         else:
-            files = [
-                "assets/Blogs.pdf",  # path to your PDFs
-                "assets/Book.pdf"
-            ]
-            try:
-                upload_results = upload_to_gemini(gemini_api_key, files, mime_type="application/pdf")
-                wait_for_files_active(upload_results)
+            with st.spinner("Generating suggestions..."):
+                files = [
+                    "assets/Blogs.pdf",  # path to your PDFs
+                    "assets/Book.pdf"
+                ]
+                try:
+                    upload_results = upload_to_gemini(gemini_api_key, files, mime_type="application/pdf")
+                    wait_for_files_active(upload_results)
 
-                response = generate_suggestions(
-                    gemini_api_key,
-                    video_topic_input,
-                    target_audience_input,
-                    selling_point_input,
-                    question_input,
-                    upload_results
-                )
+                    response = generate_suggestions(
+                        gemini_api_key,
+                        video_topic_input,
+                        target_audience_input,
+                        selling_point_input,
+                        question_input,
+                        upload_results
+                    )
 
-                st.subheader("Generated Suggestions")
-                st.write(f"🤖 AI: {response}")
-            except Exception as e:
-                st.error(f"Error encountered: {str(e)}")
+                    st.subheader("Generated Suggestions")
+                    st.write(f"🤖 AI: {response}")
+                except Exception as e:
+                    st.error(f"Error encountered: {str(e)}")
