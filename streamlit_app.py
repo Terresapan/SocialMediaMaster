@@ -37,7 +37,7 @@ if st.sidebar.button("Submit Feedback"):
     else:
         st.sidebar.error("Please enter your feedback before submitting.")
 
-st.sidebar.image("assets/logo01.jpg", use_column_width=True)
+st.sidebar.image("assets/logo01.jpg", use_container_width=True)
 
 # Ask user for their Gemini API key via `st.text_input`.
 gemini_api_key = st.text_input("Gemini API Key", type="password", placeholder="Your Gemini API key here...")
